@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Quiz Seconde - Règles & Pilosité</title>
     <style>
         * {
@@ -15,49 +15,51 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
+            font-size: 16px;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 100%;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             overflow: hidden;
         }
         
         .header {
             background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-            padding: 30px;
+            padding: 20px 15px;
             text-align: center;
             color: white;
         }
         
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .subtitle {
-            font-size: 1.2em;
+            font-size: 1em;
             opacity: 0.9;
+            line-height: 1.3;
         }
         
         .game-content {
-            padding: 40px;
+            padding: 20px 15px;
         }
         
         .mode-selector {
             display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
         }
         
         .mode-btn {
-            padding: 15px 30px;
+            padding: 18px 20px;
             border: none;
             border-radius: 12px;
             font-size: 1.1em;
@@ -66,6 +68,11 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         
         .mode-btn.menstruation {
@@ -78,43 +85,42 @@
             color: white;
         }
         
-        .mode-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .mode-btn:active {
+            transform: scale(0.95);
         }
         
         .mode-btn.active {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
         
         .question-card {
             background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 20px;
-            border-left: 5px solid #3498db;
+            border-radius: 12px;
+            padding: 20px 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
             display: none;
         }
         
         .question-card.active {
             display: block;
-            animation: slideIn 0.5s ease-out;
+            animation: slideIn 0.4s ease-out;
         }
         
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateX(-20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
         }
         
         .question {
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             color: #333;
             margin-bottom: 20px;
@@ -122,24 +128,29 @@
         }
         
         .answers {
-            display: grid;
-            gap: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         
         .answer {
-            padding: 15px 20px;
+            padding: 18px 15px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
+            transition: all 0.2s ease;
+            font-size: 1em;
             background: white;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            line-height: 1.3;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        .answer:hover {
-            border-color: #3498db;
-            background: #ebf3fd;
-            transform: translateX(5px);
+        .answer:active {
+            transform: scale(0.98);
+            background: #f0f8ff;
         }
         
         .answer.correct {
@@ -156,7 +167,7 @@
         
         .explanation {
             margin-top: 20px;
-            padding: 20px;
+            padding: 15px;
             background: #e8f4f8;
             border-radius: 10px;
             border-left: 4px solid #17a2b8;
@@ -165,7 +176,7 @@
         
         .explanation.show {
             display: block;
-            animation: fadeIn 0.5s ease-in;
+            animation: fadeIn 0.4s ease-in;
         }
         
         @keyframes fadeIn {
@@ -175,26 +186,38 @@
         
         .explanation h4 {
             color: #17a2b8;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .explanation p {
+            line-height: 1.4;
+            font-size: 0.95em;
         }
         
         .progress {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 30px 0;
-            padding: 20px;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
             background: #f8f9fa;
             border-radius: 10px;
         }
         
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
         .progress-bar {
-            flex: 1;
             height: 8px;
             background: #e0e0e0;
             border-radius: 4px;
-            margin: 0 20px;
             overflow: hidden;
         }
         
@@ -208,16 +231,21 @@
         .navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            gap: 10px;
+            margin-top: 25px;
         }
         
         .nav-btn {
-            padding: 12px 25px;
+            padding: 15px 20px;
             border: none;
             border-radius: 8px;
             font-size: 1em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            min-height: 50px;
+            flex: 1;
+            font-weight: 600;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .nav-btn.prev {
@@ -230,9 +258,8 @@
             color: white;
         }
         
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        .nav-btn:active {
+            transform: scale(0.95);
         }
         
         .nav-btn:disabled {
@@ -241,61 +268,135 @@
             transform: none;
         }
         
-        .score-display {
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
         .final-score {
             text-align: center;
-            padding: 40px;
+            padding: 30px 20px;
             background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
             color: white;
-            border-radius: 15px;
-            margin: 30px 0;
+            border-radius: 12px;
+            margin: 20px 0;
             display: none;
         }
         
         .final-score.show {
             display: block;
-            animation: bounceIn 0.8s ease-out;
+            animation: bounceIn 0.6s ease-out;
         }
         
         @keyframes bounceIn {
             0% {
                 opacity: 0;
-                transform: scale(0.3);
+                transform: scale(0.8);
             }
             50% {
                 opacity: 1;
                 transform: scale(1.05);
             }
             70% {
-                transform: scale(0.9);
+                transform: scale(0.95);
             }
             100% {
                 transform: scale(1);
             }
         }
         
+        .final-score h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .final-score p {
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+        
         .restart-btn {
             background: white;
             color: #2c3e50;
             border: 2px solid white;
-            padding: 12px 30px;
+            padding: 15px 25px;
             border-radius: 25px;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            min-height: 50px;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        .restart-btn:hover {
+        .restart-btn:active {
+            transform: scale(0.95);
             background: #2c3e50;
             color: white;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+                font-size: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.6em;
+            }
+            
+            .question {
+                font-size: 1.1em;
+            }
+            
+            .answer {
+                font-size: 0.95em;
+                padding: 16px 12px;
+            }
+            
+            .mode-btn {
+                font-size: 1em;
+                padding: 16px 15px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .game-content {
+                padding: 15px 10px;
+            }
+            
+            .question {
+                font-size: 1.05em;
+            }
+            
+            .answer {
+                font-size: 0.9em;
+            }
+        }
+        
+        /* Landscape orientation adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .header {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.4em;
+                margin-bottom: 5px;
+            }
+            
+            .subtitle {
+                font-size: 0.9em;
+            }
+            
+            .game-content {
+                padding: 15px;
+            }
+            
+            .mode-selector {
+                flex-direction: row;
+            }
+            
+            .mode-btn {
+                min-height: 50px;
+                font-size: 0.95em;
+            }
         }
     </style>
 </head>
@@ -317,11 +418,13 @@
             </div>
             
             <div class="progress">
-                <span id="questionCounter">Sélectionnez un thème pour commencer</span>
+                <div class="progress-info">
+                    <span id="questionCounter">Sélectionnez un thème pour commencer</span>
+                    <span class="score-display" id="scoreDisplay">Score: 0/0</span>
+                </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
-                <span class="score-display" id="scoreDisplay">Score: 0/0</span>
             </div>
             
             <div id="questionsContainer">
@@ -620,6 +723,16 @@
 
         // Initialize
         updateNavigation();
+
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
