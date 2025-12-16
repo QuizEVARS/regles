@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Quiz Seconde - Règles & Pilosité</title>
+  <title>On en parle ? · Quiz EVARS</title>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,7 +14,6 @@
       padding: 10px;
       font-size: 16px;
 
-      /* Fond un peu plus vivant */
       background:
         radial-gradient(900px 500px at 15% 10%, rgba(255,255,255,0.14), transparent 60%),
         radial-gradient(900px 500px at 85% 30%, rgba(255,255,255,0.10), transparent 60%),
@@ -40,7 +39,6 @@
       overflow: hidden;
     }
 
-    /* Motif discret */
     .header::before{
       content: "";
       position: absolute;
@@ -55,8 +53,8 @@
 
     .header h1{
       position: relative;
-      font-size: 1.85em;
-      margin-bottom: 6px;
+      font-size: 1.95em;
+      margin-bottom: 8px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
       letter-spacing: 0.6px;
     }
@@ -68,9 +66,17 @@
       line-height: 1.35;
     }
 
+    .tagline{
+      position: relative;
+      display:block;
+      margin-top: 8px;
+      font-size: 0.78em;
+      opacity: 0.78;
+      letter-spacing: 0.35px;
+    }
+
     .game-content{ padding: 20px 15px; }
 
-    /* Accueil sans emojis mais plus “jeu” */
     .mode-selector{
       display: flex;
       flex-direction: column;
@@ -80,7 +86,8 @@
 
     .mode-btn{
       position: relative;
-      padding: 18px 20px 18px 54px; /* place pour le badge */
+      overflow: hidden;
+      padding: 18px 20px;
       border: none;
       border-radius: 12px;
       font-size: 1.08em;
@@ -96,33 +103,17 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Badge coloré (remplace les emojis) */
-    .mode-btn{
-  position: relative;
-  overflow: hidden;
-  padding-left: 20px; /* plus besoin de place pour un badge */
-}
-
-/* Barre verticale */
-.mode-btn::after{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  opacity: 0.9;
-}
-
-/* Même barre claire pour les deux (la couleur du bouton fait le job) */
-.mode-btn.menstruation::after{
-  background: rgba(255,255,255,0.45);
-}
-
-.mode-btn.poils::after{
-  background: rgba(255,255,255,0.45);
-}
-
+    /* ✅ Option B : barre verticale au lieu des carrés */
+    .mode-btn::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      opacity: 0.9;
+      background: rgba(255,255,255,0.45);
+    }
 
     .mode-btn.menstruation{
       background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
@@ -141,7 +132,6 @@
       box-shadow: 0 12px 22px rgba(0,0,0,0.22);
     }
 
-    /* PROGRESSION plus visible */
     .progress{
       display: flex;
       flex-direction: column;
@@ -179,7 +169,6 @@
       transition: width 0.45s ease;
     }
 
-    /* CARTE question + look “quiz” */
     .question-card{
       background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
       border-radius: 14px;
@@ -201,7 +190,7 @@
     }
 
     .question{
-      font-size: 1.18em;     /* moins “devoir”, plus “quiz” */
+      font-size: 1.18em;
       font-weight: 750;
       color: #2c3e50;
       margin-bottom: 18px;
@@ -277,7 +266,6 @@
 
     .explanation p{ line-height: 1.42; font-size: 0.95em; }
 
-    /* NAV */
     .navigation{
       display: flex;
       justify-content: space-between;
@@ -291,7 +279,7 @@
       border-radius: 10px;
       font-size: 1em;
       cursor: pointer;
-      transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+      transition: transform 0.15s ease, filter 0.15s ease;
       min-height: 50px;
       flex: 1;
       font-weight: 850;
@@ -309,15 +297,8 @@
     }
 
     .nav-btn:active{ transform: scale(0.985); filter: brightness(0.98); }
-    .nav-btn:disabled{
-      opacity: 0.55;
-      cursor: not-allowed;
-      transform: none;
-      filter: none;
-      box-shadow: none;
-    }
+    .nav-btn:disabled{ opacity: 0.55; cursor: not-allowed; transform: none; filter: none; }
 
-    /* FIN */
     .final-score{
       text-align: center;
       padding: 30px 20px;
@@ -361,10 +342,10 @@
 
     @media (max-width: 480px){
       body{ padding: 5px; font-size: 15px; }
-      .header h1{ font-size: 1.6em; }
+      .header h1{ font-size: 1.65em; }
       .question{ font-size: 1.1em; }
       .answer{ font-size: 0.95em; padding: 16px 12px; }
-      .mode-btn{ font-size: 1em; padding: 16px 15px 16px 52px; }
+      .mode-btn{ font-size: 1em; padding: 16px 15px; }
     }
 
     @media (max-width: 360px){
@@ -387,14 +368,14 @@
 <body>
   <div class="container">
     <div class="header">
-      <!-- Sans emojis sur l'accueil -->
-      <h1>Quiz</h1>
-      <p class="subtitle">Règles & Pilosité : démêlons le vrai du faux</p>
+      <!-- ✅ Option 1 -->
+      <h1>On en parle ?</h1>
+      <p class="subtitle">Corps, relations, égalité : comprendre et questionner les idées reçues</p>
+      <span class="tagline">Éducation à la vie affective, relationnelle et à la sexualité</span>
     </div>
 
     <div class="game-content">
       <div class="mode-selector">
-        <!-- Sans emojis sur l'accueil -->
         <button class="mode-btn menstruation" onclick="selectMode('menstruation')">Menstruations</button>
         <button class="mode-btn poils" onclick="selectMode('poils')">Pilosité corporelle</button>
       </div>
@@ -719,7 +700,6 @@
       const wrong = questions.length - score;
       const percentage = Math.round((score / questions.length) * 100);
 
-      // ✅ "Félicitations" seulement si ≤ 1 mauvaise réponse
       finalTitle.textContent = (wrong <= 1) ? "🎉 Félicitations ! 🎉" : "📊 Résultats";
 
       let message = `Tu as obtenu ${score}/${questions.length} (${percentage}%) !<br><br>`;
@@ -783,10 +763,8 @@
       selectMode(currentMode);
     }
 
-    // init
     updateNavigation();
 
-    // Prevent zoom on double tap
     let lastTouchEnd = 0;
     document.addEventListener('touchend', function(event){
       const now = (new Date()).getTime();
