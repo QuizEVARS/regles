@@ -321,7 +321,7 @@
         <div id="questionsContainer"></div>
 
         <div class="final-score" id="finalScore">
-            <h2>🎉 Félicitations ! 🎉</h2>
+            <h2 id="finalTitle">Résultats</h2>
             <p id="finalMessage"></p>
 
             <button class="restart-btn" onclick="restartGame()">Recommencer</button>
@@ -395,18 +395,17 @@
         }
     ];
 
-    // ✅ Nouvelles fausses réponses (plus plausibles)
     const poilsQuestions = [
         {
-            question: "À quel âge commence généralement l'apparition des poils pubiens ?",
+            question: "Qu’est-ce qui explique le mieux la grande diversité de pilosité entre les personnes ?",
             answers: [
-                "7-9 ans (avant la puberté, de façon habituelle)",
-                "10-14 ans",
-                "15-17 ans (plutôt en fin de puberté)",
-                "Uniquement après les premières règles / premières éjaculations"
+                "Surtout l’hygiène et la fréquence des douches",
+                "Principalement la génétique et les hormones",
+                "Le type de vêtements portés (jeans, leggings, etc.)",
+                "Le climat : plus il fait froid, plus on développe de poils"
             ],
             correct: 1,
-            explanation: "Les poils pubiens apparaissent généralement entre 10 et 14 ans, souvent comme l'un des premiers signes de la puberté. Cette apparition est due aux hormones sexuelles et est parfaitement normale pour tous les genres."
+            explanation: "La pilosité varie énormément d’une personne à l’autre, et c’est surtout lié à la génétique et aux hormones (quantité, sensibilité des follicules, etc.). Il n’y a pas une “norme” unique : cette diversité est normale."
         },
         {
             question: "Quelle est la fonction principale des poils corporels ?",
@@ -423,12 +422,12 @@
             question: "Concernant l'épilation/rasage, quelle affirmation est vraie ?",
             answers: [
                 "C’est recommandé médicalement pour éviter la plupart des infections",
-                "C'est un choix personnel",
+                "Il n’y a pas d’obligation générale : c’est une question de préférence",
                 "C’est obligatoire pour limiter les odeurs corporelles",
                 "Il vaut mieux éviter avant la fin de la puberté (sinon les poils repoussent anormalement)"
             ],
             correct: 1,
-            explanation: "L'épilation ou le rasage est un choix purement personnel et esthétique. Il n'y a aucune obligation d'hygiène à s'épiler. Chacun·e est libre de garder ses poils naturels ou de les enlever selon ses préférences personnelles."
+            explanation: "L'épilation ou le rasage est un choix personnel et esthétique. Il n'y a aucune obligation d'hygiène à s'épiler. Chacun·e est libre de garder ses poils naturels ou de les enlever selon ses préférences."
         },
         {
             question: "Pourquoi y a-t-il souvent plus de pression sociale sur les filles concernant l'épilation ?",
@@ -436,21 +435,21 @@
                 "Parce que les poils féminins sont biologiquement plus visibles et plus épais",
                 "À cause de stéréotypes de genre",
                 "Parce que l’épilation réduit forcément la transpiration",
-                "Parce que c’est imposé par des règles officielles dans la plupart des pays"
+                "Parce que les produits d’épilation sont historiquement davantage commercialisés pour les femmes"
             ],
             correct: 1,
-            explanation: "Cette pression est due aux stéréotypes de genre et aux normes esthétiques socialement construites. Il n'y a aucune raison biologique ou d'hygiène qui justifie cette différence de traitement. C'est important de questionner ces injonctions."
+            explanation: "La pression autour de l’épilation féminine vient surtout de stéréotypes de genre et de normes esthétiques construites socialement. Le marketing ou les habitudes de consommation en sont plutôt une conséquence qu’une cause."
         },
         {
             question: "Quel message est important à retenir sur la pilosité corporelle ?",
             answers: [
                 "Un corps sans poils est forcément plus sain",
-                "Chaque corps est normal et respectable",
+                "Il n’existe pas de norme universelle : chacun·e peut faire ses propres choix concernant son corps",
                 "Les poils indiquent un manque d’hygiène",
                 "Il faut suivre les tendances pour éviter le jugement"
             ],
             correct: 1,
-            explanation: "Le message clé est l'acceptation et le respect de la diversité corporelle. Avoir des poils est naturel, les enlever ou les garder est un choix personnel. L'important est de ne pas juger les autres et de respecter les différences."
+            explanation: "Il n’existe pas de modèle unique de corps « normal ». Avoir des poils ou non relève d’un choix personnel, et aucune option n’est supérieure à une autre. Le respect des choix et des différences est essentiel."
         },
         {
             question: "Quelle hormone est principalement responsable de la croissance des poils ?",
@@ -461,7 +460,7 @@
                 "L’hormone de croissance"
             ],
             correct: 1,
-            explanation: "La testostérone (présente chez tous les genres, en quantités différentes) est l'hormone principale qui stimule la croissance des poils corporels pendant la puberté. C'est pourquoi la pilosité se développe à ce moment-là."
+            explanation: "La testostérone (présente chez tous les genres, en quantités différentes) est l'hormone principale qui stimule la croissance des poils corporels pendant la puberté."
         },
         {
             question: "Les poils des aisselles et du pubis ont-ils une fonction spécifique ?",
@@ -472,7 +471,7 @@
                 "Oui, ils servent surtout à refroidir la zone en évacuant la chaleur par la transpiration"
             ],
             correct: 1,
-            explanation: "Ces poils ont une fonction protectrice importante : ils réduisent les frottements dans ces zones sensibles, maintiennent une température stable et peuvent retenir des phéromones naturelles. Ils ne sont pas 'inutiles' mais ont des rôles biologiques."
+            explanation: "Ces poils ont une fonction protectrice : ils réduisent les frottements dans ces zones sensibles, et peuvent retenir des signaux chimiques (phéromones)."
         },
         {
             question: "Dans l'histoire, comment la pilosité féminine était-elle perçue ?",
@@ -483,7 +482,7 @@
                 "Considérée comme un signe de maladie dans la plupart des sociétés"
             ],
             correct: 1,
-            explanation: "La perception de la pilosité féminine a énormément varié selon les époques et les cultures. L'idée que les femmes doivent s'épiler est relativement récente (XXe siècle) et n'est pas universelle. Cela montre que ces 'normes' sont socialement construites."
+            explanation: "La perception de la pilosité féminine a énormément varié selon les époques et les cultures. L’idée d’une obligation d’épilation est relativement récente et n’est pas universelle."
         }
     ];
 
@@ -524,13 +523,11 @@
             </div>
         `;
 
-        // Si une réponse existe déjà, on restaure l'affichage
         if (userAnswers[currentQuestionIndex] !== undefined) {
             selectAnswer(userAnswers[currentQuestionIndex]);
         }
     }
 
-    // ✅ Recalcule le score à partir des réponses (évite le double comptage)
     function recomputeScore() {
         score = 0;
         for (let i = 0; i < questions.length; i++) {
@@ -545,16 +542,11 @@
         const answers = document.querySelectorAll('.answer');
         const explanation = document.getElementById('explanation');
 
-        // Sauvegarde la réponse
         userAnswers[currentQuestionIndex] = answerIndex;
-
-        // Recalcule le score proprement
         recomputeScore();
 
-        // Désactive tous les choix
         answers.forEach(answer => answer.style.pointerEvents = 'none');
 
-        // Marque correct/incorrect
         answers.forEach((answer, index) => {
             if (index === question.correct) {
                 answer.classList.add('correct');
@@ -563,7 +555,6 @@
             }
         });
 
-        // Affiche l'explication
         explanation.classList.add('show');
 
         updateNavigation();
@@ -597,7 +588,6 @@
         document.getElementById('progressFill').style.width = `${progress}%`;
         document.getElementById('questionCounter').textContent = `Question ${currentQuestionIndex + 1}/${questions.length}`;
 
-        // Score sur questions déjà répondues dans l'avancement
         const answeredCount = userAnswers.slice(0, currentQuestionIndex + 1).filter(v => v !== undefined).length;
         const correctSoFar = userAnswers.slice(0, currentQuestionIndex + 1).reduce((acc, ans, i) => {
             if (ans !== undefined && ans === questions[i].correct) return acc + 1;
@@ -632,32 +622,35 @@
         recomputeScore();
 
         const finalScoreEl = document.getElementById('finalScore');
+        const finalTitle = document.getElementById('finalTitle');
         const finalMessage = document.getElementById('finalMessage');
+
+        const wrong = questions.length - score;
         const percentage = Math.round((score / questions.length) * 100);
+
+        finalTitle.textContent = (wrong <= 1) ? "🎉 Félicitations ! 🎉" : "📊 Résultats";
 
         let message = `Tu as obtenu ${score}/${questions.length} (${percentage}%) !<br><br>`;
 
         if (percentage >= 90) {
-            message += "🏆 Parfait ! Tu es incollable sur le sujet ! Tes connaissances solides t'aideront à démystifier ces sujets autour de toi.";
+            message += "🏆 Très solide ! Tu es presque incollable sur le sujet — et ça aide vraiment à démystifier ces thèmes.";
         } else if (percentage >= 75) {
-            message += "🌟 Excellent ! Tu maîtrises très bien le sujet. Continue à partager tes connaissances pour briser les tabous !";
+            message += "🌟 Très bien ! Tu maîtrises bien le sujet. Continue à partager ces infos pour briser les tabous.";
         } else if (percentage >= 50) {
-            message += "👍 Bien joué ! Tu as de bonnes bases sur ces sujets importants. Quelques révisions et tu seras au top !";
+            message += "👍 Bien joué ! Tu as de bonnes bases. Quelques révisions et tu seras au top.";
         } else if (percentage >= 25) {
-            message += "📚 Il y a encore quelques notions à approfondir. Ces sujets méritent qu'on s'y intéresse davantage !";
+            message += "📚 Il y a encore des notions à approfondir. Ces sujets valent le coup d’être mieux compris.";
         } else {
-            message += "🔍 Il semble que ces sujets soient nouveaux pour toi. C'est l'occasion parfaite pour apprendre et poser des questions !";
+            message += "🔍 C’est peut-être nouveau pour toi : parfait pour apprendre, poser des questions et démêler les idées reçues !";
         }
 
         finalMessage.innerHTML = message;
         finalScoreEl.classList.add('show');
 
-        // Reset review
         const review = document.getElementById('reviewContainer');
         review.style.display = 'none';
         review.innerHTML = '';
 
-        // Hide questions container + nav
         document.getElementById('questionsContainer').style.display = 'none';
         document.querySelector('.navigation').style.display = 'none';
     }
@@ -699,10 +692,8 @@
         selectMode(currentMode);
     }
 
-    // Initialize
     updateNavigation();
 
-    // Prevent zoom on double tap
     let lastTouchEnd = 0;
     document.addEventListener('touchend', function (event) {
         const now = (new Date()).getTime();
